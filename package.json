@@ -28,7 +28,14 @@
     "stylelint": "stylelint 'react-ssr/**/*.(less|css)' --fix",
     "precommit": "lint-staged"
   },
-
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "{react-ssr,app,config}/**/*.{js,jsx}": "eslint --ext .jsx,.js"
+  },
   "dependencies": {
     "@ant-design/icons": "^4.4.0",
     "@babel/plugin-syntax-dynamic-import": "^7.8.3",
