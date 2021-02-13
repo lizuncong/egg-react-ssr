@@ -1,0 +1,1 @@
+export const CHANGE_MORE_VALUE = 'APP/CHANGE_MORE_VALUE';

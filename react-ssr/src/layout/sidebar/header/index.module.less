@@ -1,0 +1,34 @@
+.header {
+  display: flex;
+  height: 40px;
+  padding: 0 20px;
+  background-color: white;
+  box-shadow: 0 0 5px 3px rgba(69, 165, 255, 0.12);
+
+  .left {
+    .breadcrumb {
+      position: relative;
+      display: flex;
+      align-items: center;
+      height: 100%;
+
+      &::after {
+        position: absolute;
+        bottom: 0;
+        left: 50%;
+        border-top: 10px solid white;
+        border-right: 12px solid transparent;
+        border-left: 12px solid transparent;
+        transform: translate(-50%, 100%);
+        content: '';
+      }
+    }
+  }
+
+  .right {
+    display: flex;
+    flex: 1;
+    align-items: center;
+    justify-content: flex-end;
+  }
+}
