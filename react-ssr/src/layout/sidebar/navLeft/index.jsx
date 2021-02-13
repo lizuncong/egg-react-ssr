@@ -35,6 +35,8 @@ class NavLeft extends React.Component {
         </div>
         <Menu
           menuData={menuData}
+          mode="inline"
+          theme="dark"
           selectedKeys={[currentUrl]}
           onClick={(menuItem) => this.handleClick(menuItem)}
         />

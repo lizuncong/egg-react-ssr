@@ -1,7 +1,6 @@
 import React from 'react';
 import { Menu } from 'antd';
 import { NavLink } from 'react-router-dom';
-import IconFont from '../Icon';
 
 const { SubMenu } = Menu;
 
@@ -14,7 +13,6 @@ class IMenu extends React.Component {
           <SubMenu
             title={item.title}
             key={item.url}
-            icon={item.icon ? <IconFont type={item.icon} /> : ' '}
           >
             {this.renderMenu(item.children)}
           </SubMenu>
@@ -29,14 +27,15 @@ class IMenu extends React.Component {
   }
 
   render() {
-    const { selectedKeys, menuData, onClick } = this.props;
+    const {
+      selectedKeys, mode, theme, menuData, onClick,
+    } = this.props;
     return (
       <Menu
         onClick={(menuItem) => onClick(menuItem)}
         selectedKeys={selectedKeys}
-        mode="inline"
-        theme="light"
-        expandIcon={<IconFont type="icondown" />}
+        mode={mode}
+        theme={theme}
       >
         {this.renderMenu(menuData)}
       </Menu>

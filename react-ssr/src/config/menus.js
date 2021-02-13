@@ -1,17 +1,12 @@
 const menuList = [
   {
-    title: '首页',
-    menuId: '1000',
-    url: '/',
-  },
-  {
     title: '系统配置',
-    menuId: '2000',
+    menuId: '1000',
     url: '/system',
     children: [
       {
         title: '用户管理',
-        menuId: '2001',
+        menuId: '1001',
         url: '/system/user',
       },
     ],

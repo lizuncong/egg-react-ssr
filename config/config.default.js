@@ -57,7 +57,7 @@ module.exports = appInfo => {
     database: 'mt_admin',
     password: 'root123456', // lzc
     define: {
-      freezeTableName: true, // 表名和model名一致
+      // freezeTableName: true, // 表名和model名一致
       timestamps: false, // 不自动给表添加created_at，updated_at
     },
   };

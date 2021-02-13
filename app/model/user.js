@@ -2,18 +2,34 @@
 
 
 module.exports = app => {
-  const { STRING, INTEGER, DATE } = app.Sequelize;
+  const { STRING, DECIMAL } = app.Sequelize;
 
   const User = app.model.define('user', {
-    id: {
-      type: INTEGER,
-      primaryKey: true,
-      autoIncrement: true,
+    userName: {
+      type: STRING,
+      allowNull: false,
     },
-    username: STRING(30),
-    password: STRING(30),
-    email: STRING(30),
-    phone: STRING(30),
+    password: {
+      type: STRING,
+      allowNull: false,
+      // set (value) {
+      //   this.setDataValue('password', md5(value))
+      // }
+    },
+    phone: {
+      type: STRING,
+      allowNull: false,
+      // unique: true // 这样定义索引会有问题
+    },
+    gender: {
+      type: DECIMAL,
+      allowNull: false,
+      comment: '性别(1男性，2女性 3保密)',
+    },
+    avatar: {
+      type: STRING,
+      comment: '头像',
+    },
   });
 
   return User;

@@ -10,6 +10,7 @@ import Html from './html';
 import routes from '../router/routes';
 
 const renderHtml = async ({ ctx, context }) => {
+  console.log('renderHtml...', ctx.url);
   const statsFile = path.resolve(__dirname, './web/assets/loadable-stats-web.json');
   // 根据url获取需要渲染的路由，react-router-config是个好东西
   const matchedRoutes = matchRoutes(routes, ctx.url);
@@ -47,20 +48,21 @@ const renderHtml = async ({ ctx, context }) => {
 
   const content = renderToString(jsx);
 
-  const data = {
-    title: route.title || '',
-    description: route.description || '',
-    scriptTags: webExtractor.getScriptElements(),
-    linkTags: webExtractor.getLinkElements(),
-    styleTags: webExtractor.getStyleElements(),
-    state,
-    children: content,
-    cssLinks: [
-      // "https://cdnjs.cloudflare.com/ajax/libs/antd/4.0.1/antd.min.css"
-    ],
-  };
-
-  const html = renderToStaticMarkup(<Html {...data} />);
+  const html = renderToStaticMarkup(
+    <Html
+      title={route.title || ''}
+      description={route.description || ''}
+      scriptTags={webExtractor.getScriptElements()}
+      linkTags={webExtractor.getLinkElements()}
+      styleTags={webExtractor.getStyleElements()}
+      state={state}
+      cssLinks={[
+        // "https://cdnjs.cloudflare.com/ajax/libs/antd/4.0.1/antd.min.css"
+      ]}
+    >
+      {content}
+    </Html>,
+  );
   return `<!doctype html>${html}`;
 };
 export default renderHtml;
