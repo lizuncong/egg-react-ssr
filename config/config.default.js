@@ -44,11 +44,11 @@ module.exports = appInfo => {
     agent: false,
   };
 
-  // config.security = {
-  //   csrf: {
-  //     enable: false,
-  //   },
-  // };
+  config.security = {
+    csrf: {
+      enable: false,
+    },
+  };
 
   config.sequelize = {
     dialect: 'mysql',
@@ -58,7 +58,7 @@ module.exports = appInfo => {
     password: 'root123456', // lzc
     define: {
       // freezeTableName: true, // 表名和model名一致
-      timestamps: false, // 不自动给表添加created_at，updated_at
+      // timestamps: false, // 不自动给表添加created_at，updated_at
     },
   };
   config.static = {

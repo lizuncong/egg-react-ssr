@@ -8,7 +8,10 @@ const clientAxios = createAxios({
   baseURL: '/',
 });
 
+const request = clientAxios;
+
 export {
   clientAxios,
+  request,
   serverAxios,
 };

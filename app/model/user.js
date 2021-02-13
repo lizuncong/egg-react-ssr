@@ -24,6 +24,7 @@ module.exports = app => {
     gender: {
       type: DECIMAL,
       allowNull: false,
+      defaultValue: 1,
       comment: '性别(1男性，2女性 3保密)',
     },
     avatar: {

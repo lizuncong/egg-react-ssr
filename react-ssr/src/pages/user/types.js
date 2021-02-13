@@ -1,0 +1,3 @@
+const CHANGE_MORE_VALUE = 'USER/CHANGE_MORE_VALUE';
+
+export default CHANGE_MORE_VALUE;

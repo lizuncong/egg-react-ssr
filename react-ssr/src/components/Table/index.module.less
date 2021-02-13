@@ -1,0 +1,28 @@
+.table {
+  flex: 1;
+  height: 100%;
+
+  :global {
+    .ant-table-thead > tr > th {
+      padding: 9px 12px;
+      color: rgba(53, 56, 61, 1);
+      font-weight: 400;
+      font-size: 14px;
+      background-color: #f5faff;
+      border-top: 1px solid #e6eaf0;
+      border-bottom: 1px solid #e6eaf0;
+
+      &:first-child {
+        padding-left: 20px;
+      }
+    }
+
+    .ant-table-tbody > tr > td {
+      padding: 12px;
+
+      &:first-child {
+        padding-left: 20px;
+      }
+    }
+  }
+}
