@@ -83,10 +83,10 @@ const clientConfig = {
     new webpack.DefinePlugin({
       'process.env.BROWSER': true,
     }),
-    // new HtmlWebpackPlugin({
-    //   index: 'index.html',
-    //   template: path.resolve(__dirname, '../src/template.html'),
-    // }),
+    new HtmlWebpackPlugin({
+      index: 'index.html',
+      template: path.resolve(__dirname, './template.html'),
+    }),
   ].filter(Boolean),
   node: {
     dgram: 'empty',
@@ -107,6 +107,16 @@ if (isDev) {
     headers: { 'Access-Control-Allow-Origin': '*' },
     historyApiFallback: {
       index: '/public/web/assets/index.html',
+    },
+    proxy: {
+      '/api': {
+        target: 'http://localhost:7001',
+        // secure: false, // 如果请求的网址是https，需要配置secure: false
+        pathRewrite: {
+          // '/server': '',
+        },
+        changeOrigin: true,
+      },
     },
     overlay: {
       errors: true,
