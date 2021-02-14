@@ -11,5 +11,17 @@ const menuList = [
       },
     ],
   },
+  {
+    title: '商品管理',
+    menuId: '2000',
+    url: '/product',
+    children: [
+      {
+        title: '商品列表',
+        menuId: '2001',
+        url: '/product/list',
+      },
+    ],
+  },
 ];
 export default menuList;

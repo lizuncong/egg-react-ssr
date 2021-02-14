@@ -15,10 +15,12 @@ module.exports = app => {
     },
     image: {
       type: STRING,
+      defaultValue: 'http://localhost:7001/public/imgs/default-01.png',
     },
     status: {
       type: STRING,
       allowNull: false,
+      defaultValue: 1,
       comment: '状态(1上架，2下架)',
     },
     description: {

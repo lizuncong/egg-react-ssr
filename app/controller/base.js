@@ -20,7 +20,7 @@ class BaseController extends Controller {
     const { ctx, service } = this;
     const { pageNum, pageSize, ...where } = ctx.query;
     const pNo = isNaN(pageNum) ? 1 : parseInt(pageNum);
-    const pSize = isNaN(pageSize) ? 10 : parseInt(pageSize);
+    const pSize = isNaN(pageSize) ? 100 : parseInt(pageSize);
     const result = await service[this.entity].list(pNo, pSize, where);
     this.success(result);
   }

@@ -6,7 +6,7 @@ export const changeMoreValueAction = (data) => ({
   payload: data,
 });
 
-export const getListAction = () => (dispatch, getState, axios) => axios.get(userListApi)
+export const getUserListAction = () => (dispatch, getState, axios) => axios.get(userListApi)
   .then((res) => {
     dispatch(
       changeMoreValueAction({

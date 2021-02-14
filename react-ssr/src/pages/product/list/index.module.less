@@ -1,0 +1,19 @@
+.container {
+  display: flex;
+  flex-direction: column;
+}
+
+.header {
+  padding: 16px;
+}
+
+.gridContainer {
+  display: grid;
+  flex: 1;
+  grid-auto-rows: 200px;
+  grid-gap: 12px;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  margin-bottom: 12px;
+  padding: 0 16px;
+  overflow: auto;
+}

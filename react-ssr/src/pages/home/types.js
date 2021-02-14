@@ -1,1 +1,0 @@
-export const CHANGE_MORE_VALUE = 'HOME/CHANGE_MORE_VALUE';

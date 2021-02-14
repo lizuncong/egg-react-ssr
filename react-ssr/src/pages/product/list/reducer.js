@@ -1,4 +1,4 @@
-import { CHANGE_MORE_VALUE } from './types';
+import CHANGE_MORE_VALUE from './types';
 
 const defaultState = {
   list: [],

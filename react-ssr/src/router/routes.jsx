@@ -2,12 +2,14 @@ import React from 'react';
 import loadable from '@loadable/component';
 import { Redirect } from 'react-router-dom';
 
-import { getListAction } from 'pages/user/actions';
+import { getUserListAction } from 'pages/user/actions';
+import { getProductListAction } from 'pages/product/list/actions';
 
 const SideBarLayout = loadable(() => import(/* webpackChunkName: 'sideBarLayout' */ '../layout/sidebar'));
-const Home = loadable(() => import(/* webpackChunkName: 'home' */ '../pages/home/connect'));
+const Home = loadable(() => import(/* webpackChunkName: 'home' */ '../pages/home'));
 const Login = loadable(() => import(/* webpackChunkName: 'login' */ '../pages/login/connect'));
 const User = loadable(() => import(/* webpackChunkName: 'user' */ '../pages/user/connect'));
+const ProductList = loadable(() => import(/* webpackChunkName: 'productList' */ '../pages/product/list/connect'));
 const NotFound = loadable(() => import(/* webpackChunkName: 'notFound' */ '../pages/not-found'));
 
 const routes = [
@@ -35,14 +37,20 @@ const routes = [
         exact: true,
         title: '首页',
         description: '这是我的首页',
-        // loadData: async (store) => store.dispatch(getListAction()),
       },
       {
         path: '/system/user',
         component: User,
         title: '用户',
         description: '这是用户页',
-        loadData: async (store) => store.dispatch(getListAction()),
+        loadData: async (store) => store.dispatch(getUserListAction()),
+      },
+      {
+        path: '/product/list',
+        component: ProductList,
+        title: '商品管理列表页',
+        description: '这是商品管理列表页',
+        loadData: async (store) => store.dispatch(getProductListAction()),
       },
       {
         render: () => <Redirect to="/404" />,
