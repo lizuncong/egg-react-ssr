@@ -1,4 +1,7 @@
 import React from 'react';
+import { message } from 'antd';
+import { request } from 'request/index';
+import { userDelApi } from 'api/user';
 import Table from 'components/Table';
 import CreateUser from './components/createUser';
 import styles from './index.module.less';
@@ -32,12 +35,34 @@ class User extends React.Component {
         dataIndex: 'createdAt',
         key: 'createdAt',
       },
+      {
+        title: '操作',
+        render: (text, record) => (
+          <span
+            className={styles.clickText}
+            onClick={() => this.onDelete(record)}
+          >
+            删除
+          </span>
+        ),
+      },
     ];
   }
 
   componentDidMount() {
     const { getList, list } = this.props;
     if (!list.length) {
+      getList();
+    }
+  }
+
+  async onDelete(record) {
+    const { getList } = this.props;
+    const result = await request.post(userDelApi, {
+      id: record.id,
+    });
+    if (result) {
+      message.success('删除成功');
       getList();
     }
   }

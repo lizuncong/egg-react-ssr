@@ -30,9 +30,20 @@ class BaseService extends Service {
   // }
   //
   // async destroy(id) {
-  //   const result = await this.app.mysql.delete(this.entity, { id });
+  //   const result = await this.ctx.model[this.entity].delete(this.entity, { id });
   //   return result.affectedRows > 0;
   // }
+
+  async destroy(id) {
+    const ctx = this.ctx;
+    const idTemp = Number(id);
+    const user = await ctx.model[this.entity].findByPk(idTemp);
+    if (!user) {
+      ctx.status = 404;
+      return;
+    }
+    return await user.destroy();
+  }
 }
 
 module.exports = BaseService;
