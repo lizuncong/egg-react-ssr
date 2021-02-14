@@ -9,6 +9,7 @@ module.exports = app => {
   router.get('/api/user/list', controller.user.list);
   router.post('/api/user/create', controller.user.create);
   router.post('/api/user/del', controller.user.destroy);
+  router.post('/api/user/update', controller.user.update);
 
   router.get('*', controller.serverRender.index.render);
 };

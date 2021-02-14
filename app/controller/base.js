@@ -32,14 +32,12 @@ class BaseController extends Controller {
     result ? this.success(result) : this.error('创建失败');
   }
 
-  // async update() {
-  //   const { ctx, service } = this;
-  //   const id = ctx.params.id;
-  //   const entity = ctx.request.body;
-  //   entity.id = id;
-  //   const result = await service[this.entity].update(entity);
-  //   result ? this.success(result) : this.error('更新失败');
-  // }
+  async update() {
+    const { ctx, service } = this;
+    const entity = ctx.request.body;
+    const result = await service[this.entity].update(entity);
+    result ? this.success(result) : this.error('更新失败');
+  }
 
   async destroy() {
     const { ctx, service } = this;

@@ -38,15 +38,26 @@ class User extends React.Component {
       {
         title: '操作',
         render: (text, record) => (
-          <span
-            className={styles.clickText}
-            onClick={() => this.onDelete(record)}
-          >
-            删除
-          </span>
+          <>
+            <span
+              className={[styles.clickText, styles.edit].join(' ')}
+              onClick={() => this.onEdit(record)}
+            >
+              编辑
+            </span>
+            <span
+              className={styles.clickText}
+              onClick={() => this.onDelete(record)}
+            >
+              删除
+            </span>
+          </>
         ),
       },
     ];
+    this.state = {
+      editedRecord: null,
+    };
   }
 
   componentDidMount() {
@@ -54,6 +65,12 @@ class User extends React.Component {
     if (!list.length) {
       getList();
     }
+  }
+
+  onEdit(record) {
+    this.setState({
+      editedRecord: record,
+    });
   }
 
   async onDelete(record) {
@@ -69,10 +86,24 @@ class User extends React.Component {
 
   render() {
     const { list, getList } = this.props;
+    const { editedRecord } = this.state;
     return (
       <div className="container">
         <div className={styles.header}>
-          <CreateUser getList={getList} />
+          <CreateUser
+            getList={getList}
+            record={editedRecord}
+            onCancel={() => {
+              this.setState({
+                editedRecord: null,
+              });
+            }}
+            onOk={() => {
+              this.setState({
+                editedRecord: null,
+              });
+            }}
+          />
         </div>
         <Table
           rowKey="id"

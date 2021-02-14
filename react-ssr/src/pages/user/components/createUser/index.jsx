@@ -1,16 +1,21 @@
-import React, { memo, useState } from 'react';
+import React, { memo, useState, useEffect } from 'react';
 import { Input, message } from 'antd';
 import Button from 'components/Button';
 import Modal from 'components/Modal';
 import { request } from 'request/index';
-import { userCreateApi } from 'api/user';
+import { userCreateApi, userUpdateApi } from 'api/user';
 import styles from './index.module.less';
 
-const Index = memo(({ getList }) => {
+const Index = memo(({
+  getList, onOk, record, onCancel,
+}) => {
   const [visible, setVisible] = useState(false);
-  const [userName, setUserName] = useState('');
-  const [phone, setPhone] = useState('');
-  const [password, setPassword] = useState('');
+  const [params, setParams] = useState({});
+  useEffect(() => {
+    if (!record) return;
+    setVisible(true);
+    setParams(record);
+  }, [record]);
   return (
     <>
       <Button
@@ -19,48 +24,46 @@ const Index = memo(({ getList }) => {
         新增
       </Button>
       <Modal
-        title="新增用户"
+        title={record ? '编辑用户' : '新增用户'}
         visible={visible}
         onCancel={() => {
           setVisible(false);
+          onCancel();
         }}
         onOk={async () => {
-          const result = await request.post(userCreateApi, {
-            userName,
-            phone,
-            password,
-          });
+          const result = await request.post(record ? userUpdateApi : userCreateApi, params);
           if (result) {
-            message.success('新增成功！');
+            message.success(record ? '编辑成功' : '新增成功！');
             getList();
             setVisible(false);
+            onOk();
           }
         }}
       >
         <div className={styles.row}>
           <span className={styles.left}>姓名：</span>
           <Input
-            value={userName}
+            value={params.userName}
             onChange={(e) => {
-              setUserName(e.target.value);
+              setParams({ ...params, userName: e.target.value });
             }}
           />
         </div>
         <div className={styles.row}>
           <span className={styles.left}>密码：</span>
           <Input
-            value={password}
+            value={params.password}
             onChange={(e) => {
-              setPassword(e.target.value);
+              setParams({ ...params, password: e.target.value });
             }}
           />
         </div>
         <div className={styles.row}>
           <span className={styles.left}>电话：</span>
           <Input
-            value={phone}
+            value={params.phone}
             onChange={(e) => {
-              setPhone(e.target.value);
+              setParams({ ...params, phone: e.target.value });
             }}
           />
         </div>

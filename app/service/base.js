@@ -24,25 +24,22 @@ class BaseService extends Service {
     return await this.ctx.model[this.entity].create(entity);
   }
 
-  // async update(entity) {
-  //   const result = await this.app.mysql.update(this.entity, entity);
-  //   return result.affectedRows > 0;
-  // }
-  //
-  // async destroy(id) {
-  //   const result = await this.ctx.model[this.entity].delete(this.entity, { id });
-  //   return result.affectedRows > 0;
-  // }
+  async update(entity) {
+    const ctx = this.ctx;
+    const instance = await ctx.model[this.entity].findByPk(entity.id);
+    await instance.update(entity);
+    return instance;
+  }
 
   async destroy(id) {
     const ctx = this.ctx;
     const idTemp = Number(id);
-    const user = await ctx.model[this.entity].findByPk(idTemp);
-    if (!user) {
+    const instance = await ctx.model[this.entity].findByPk(idTemp);
+    if (!instance) {
       ctx.status = 404;
       return;
     }
-    return await user.destroy();
+    return await instance.destroy();
   }
 }
 
